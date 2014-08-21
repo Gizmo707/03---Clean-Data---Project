@@ -13,7 +13,7 @@ names(testData) <- features$V2
 # Join datasets
 data <- rbind(trainData,testData)
 # Build logical vector to select columns
-keepVar <- grepl("mean",features$V2) | grepl("Mean",features$V2) | grepl("Std",features$V2)
+keepVar <- grepl("mean",features$V2) | grepl("Mean",features$V2) | grepl("std",features$V2)
 # Select variables of interest
 data <- data[,keepVar]
 # Get and join activity info
