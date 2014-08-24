@@ -13,7 +13,7 @@ names(testData) <- features$V2
 # Join datasets
 data <- rbind(trainData,testData)
 # Build logical vector to select columns
-keepVar <- grepl("mean",features$V2) | grepl("Mean",features$V2) | grepl("std",features$V2)
+keepVar <- grepl("[Mm]ean",features$V2) | grepl("std",features$V2)
 # Select variables of interest
 data <- data[,keepVar]
 # Get and join activity info
@@ -36,7 +36,14 @@ data <- cbind(subject,activity,data)
 #
 # Create second data set
 data2 <- aggregate(data[,4:length(data[1,])],by=list(data$Subject,data$ActivityName),FUN=mean)
-# Assign names to groups
-names(data2)[1:2]=c("Subject","ActivityName")
+# Assign names to variables
+names[1:2] <- c("Subject","ActivityName") # Group names
+names <- gsub("mean", "Mean", names) # Mean to upercase
+names <- gsub("\\(\\)", "", names)   # Eliminate ()
+names <- gsub("-", "_", names)       # Change - to _
+names <- gsub("std","Std",names)     # Std to upercase
+names <- gsub("\\(", "_", names)     # Change remainin ( to _
+names <- gsub("\\)", "", names)      # Eliminate )
+names(data2) <- names
 # Write table to disk
 write.table(data2,"meansByActivity.txt",row.names=FALSE)
