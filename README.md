@@ -5,19 +5,19 @@ Purpose
 -------
 The objective of this project is to obtain a tidy data set containing means and standard deviation for 30 subjects while performing six activities:
 
-1.- WALKING
-2.- WALKING_UPSTAIRS
-3.- WALKING_DOWNSTAIRS
-4.- SITTING
-5.- STANDING
-6.- LAYING
+1. WALKING
+2. WALKING_UPSTAIRS
+3. WALKING_DOWNSTAIRS
+4. SITTING
+5. STANDING
+6. LAYING
 
 The original dataset was obtained from
 	https://d396qusza40orc.cloudfront.net/getdata/projectfiles/UCI%20HAR%20Dataset.zip 
 while the data description can be found at
 	http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
 	
-Between 36 and 95 sets of features were collected for subjects when performing each activity. For this project only variables (features) containing one of the string "Mean", "mean" or "std" were selected reducing the number of features from 561 to 86. The resulting dataset provides the average of the values of means and standard deviations for each subject performing each activity, that is 180 observations of the remaining 86 variables (plus two to identify subject and activity)
+Between 36 and 95 sets of features were collected for subjects when performing each activity. For this project, only variables (features) containing one of the string "Mean", "mean" or "std" were selected reducing the number of features from 561 to 86. The resulting dataset provides the average of the values of means and standard deviations for each subject performing each activity, that is 180 observations of the remaining 86 variables (plus two to identify subject and activity)
 
 The R processing script
 -----------------------
@@ -37,12 +37,21 @@ The script performs the following tasks:
 * Join subject, activity and data
 * Adjust variable names to make them more compatible with R (i.e. containing only letters and _)
 * Create the second data frame.
+* Write frame to disk
 
+Variable Names
+--------------
+The names of the features contain characters (in particular "(", ")", ",",  and "-")that make inconvenient accessing them in R. Therefore it was necessary to eliminate or replace them. The idea is to keep them as similar as possible to the original names while using only letters and underscores. While Prof. Leek suggest to use only lower case letters I decided to use both upper and lower case letters as well as underscores. The reason is that the variable names are composed of multiple parts indicating what they represent and that while it may be harder to type the names, they will be easier to read by humans.
 
+The changes to the original names were:
 
+* Elimination of "()"
+* Elimination of ")"
+* Replacement of "(" by "_"
+* Replacement of "-" by "_"
+* Use of Upper case first letter for "Mean" and "Std"
 
-
-
+Below is the original description of the variables for reference
 
 
 Original description of the variables (features) in the data set

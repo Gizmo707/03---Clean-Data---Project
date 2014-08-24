@@ -45,6 +45,6 @@ names(data) <- names
 # Create second data set
 data2 <- aggregate(data[,4:length(data[1,])],by=list(data$Subject,data$ActivityName),FUN=mean)
 # Assign names to variables used to partition data
-names[1:2] <- c("Subject","ActivityName") # Group names
+names(data2)[1:2] <- c("Subject","ActivityName") # Group names
 # Write table to disk
 write.table(data2,"meansByActivity.txt",row.names=FALSE)
